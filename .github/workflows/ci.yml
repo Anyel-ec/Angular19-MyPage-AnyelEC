@@ -1,0 +1,49 @@
+# Nombre del workflow que aparecerá en GitHub Actions
+name: Build Angular with pnpm
+
+# Cuándo se ejecuta este workflow
+on:
+  # Cuando hay un push al branch main
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    # Define el sistema operativo donde se ejecutará
+    runs-on: ubuntu-22.04
+
+    strategy:
+      matrix:
+        # Aquí puedes poner más versiones si quieres testear varias versiones de Node.js
+        node-version: [22.17.0]
+    steps:
+      # Paso 1: Clona tu código en el runner
+      - uses: actions/checkout@v4
+
+      # Paso 2: Instala pnpm usando la acción oficial
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      # Paso 3: Configura Node.js en la versión indicada 
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm' # activa cacheo de dependencias de pnpm
+      # Paso 4: Instala todas las dependencias del proyecto
+      - name: Install dependencies
+        run: pnpm install
+
+      # Paso 5: Genera la carpeta dist/ con el build de Angular
+      - name: Build project
+        run: pnpm build
+
+      # Paso 6: Sube la carpeta dist/ como un artefacto descargable en GitHub Actions
+      - name: Upload dist as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: angular-dist # nombre que se verá en la pestaña Actions
+          path: dist/        # carpeta que contiene los archivos generados
