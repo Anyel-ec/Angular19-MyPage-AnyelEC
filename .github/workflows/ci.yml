@@ -1,6 +1,5 @@
 # Nombre del workflow que aparecerá en GitHub Actions
 name: Build Angular with pnpm
-
 # Cuándo se ejecuta este workflow
 on:
   # Cuando hay un push al branch main
