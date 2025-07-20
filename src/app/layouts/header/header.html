@@ -1,11 +1,14 @@
-<header class="w-full bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
+<header
+  class="w-full shadow-sm border-b transition-colors duration-300"
+  [class]="isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
-
       <!-- Logo -->
       <div class="flex-shrink-0">
         <a href="/" class="flex items-center">
-          <span class="text-2xl font-bold text-gray-900 dark:text-white">
+          <span
+            class="text-2xl font-bold"
+            [class]="isDarkMode ? 'text-white' : 'text-gray-900'">
             Anyel<span class="text-cyan-500">EC</span>
           </span>
         </a>
@@ -13,30 +16,26 @@
 
       <!-- Navigation y Toggle -->
       <div class="flex items-center space-x-8">
-
         <!-- Dark Mode Toggle - ICONOS DENTRO DEL SWITCH -->
         <div class="flex items-center">
           <button
             (click)="toggleDarkMode()"
-            class="relative inline-flex h-7 w-14 items-center rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 shadow-inner"
-            [class]="isDarkMode ? 'bg-slate-600' : 'bg-gray-300'"
+            class="relative inline-flex h-7 w-14 items-center rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 shadow-inner"
+            [class]="isDarkMode ? 'bg-slate-600 focus:ring-offset-gray-800' : 'bg-gray-300 focus:ring-offset-white'"
             type="button"
             role="switch"
             [attr.aria-checked]="isDarkMode">
-
             <!-- Área de iconos fijos dentro del switch -->
             <div class="absolute inset-0 flex items-center justify-between px-1.5">
               <!-- Sol (siempre visible en la izquierda) -->
               <i class="fas fa-sun text-yellow-100 text-sm transition-opacity duration-300"
                  [class.opacity-100]="!isDarkMode"
                  [class.opacity-40]="isDarkMode"></i>
-
               <!-- Luna (siempre visible en la derecha) -->
               <i class="fas fa-moon text-blue-900 text-sm transition-opacity duration-300"
                  [class.opacity-100]="isDarkMode"
                  [class.opacity-40]="!isDarkMode"></i>
             </div>
-
             <!-- Círculo deslizante (encima de los iconos) -->
             <span class="inline-block h-5 w-5 transform rounded-full bg-white shadow-lg transition-transform duration-300 ease-in-out relative z-10"
                   [class]="isDarkMode ? 'translate-x-8' : 'translate-x-1'">
@@ -47,19 +46,23 @@
         <!-- Navigation Links -->
         <nav class="hidden md:flex space-x-8">
           <a href="/certificaciones"
-             class="text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 px-3 py-2 text-sm font-medium transition-colors duration-200">
+             class="px-3 py-2 text-sm font-medium transition-colors duration-200"
+             [class]="isDarkMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-600 hover:text-cyan-500'">
             Certificaciones
           </a>
           <a href="/servicios"
-             class="text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 px-3 py-2 text-sm font-medium transition-colors duration-200">
+             class="px-3 py-2 text-sm font-medium transition-colors duration-200"
+             [class]="isDarkMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-600 hover:text-cyan-500'">
             Servicios
           </a>
           <a href="/historia"
-             class="text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 px-3 py-2 text-sm font-medium transition-colors duration-200">
+             class="px-3 py-2 text-sm font-medium transition-colors duration-200"
+             [class]="isDarkMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-600 hover:text-cyan-500'">
             Historia
           </a>
           <a href="/contacto"
-             class="text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 px-3 py-2 text-sm font-medium transition-colors duration-200">
+             class="px-3 py-2 text-sm font-medium transition-colors duration-200"
+             [class]="isDarkMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-600 hover:text-cyan-500'">
             Contacto
           </a>
         </nav>
@@ -67,7 +70,8 @@
         <!-- Mobile menu button -->
         <div class="md:hidden">
           <button type="button"
-                  class="text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 focus:outline-none focus:text-cyan-500 transition-colors duration-200"
+                  class="focus:outline-none focus:text-cyan-500 transition-colors duration-200"
+                  [class]="isDarkMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-600 hover:text-cyan-500'"
                   (click)="toggleMobileMenu()">
             <i class="fas fa-bars text-xl"></i>
           </button>
@@ -77,21 +81,27 @@
 
     <!-- Mobile Navigation Menu -->
     <div class="md:hidden" [class.hidden]="!isMobileMenuOpen">
-      <div class="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+      <div
+        class="px-2 pt-2 pb-3 space-y-1 border-t transition-colors duration-200"
+        [class]="isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'">
         <a href="/certificaciones"
-           class="block px-3 py-2 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors duration-200">
+           class="block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200"
+           [class]="isDarkMode ? 'text-gray-300 hover:text-cyan-400 hover:bg-gray-700' : 'text-gray-600 hover:text-cyan-500 hover:bg-gray-50'">
           Certificaciones
         </a>
         <a href="/servicios"
-           class="block px-3 py-2 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors duration-200">
+           class="block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200"
+           [class]="isDarkMode ? 'text-gray-300 hover:text-cyan-400 hover:bg-gray-700' : 'text-gray-600 hover:text-cyan-500 hover:bg-gray-50'">
           Servicios
         </a>
         <a href="/historia"
-           class="block px-3 py-2 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors duration-200">
+           class="block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200"
+           [class]="isDarkMode ? 'text-gray-300 hover:text-cyan-400 hover:bg-gray-700' : 'text-gray-600 hover:text-cyan-500 hover:bg-gray-50'">
           Historia
         </a>
         <a href="/contacto"
-           class="block px-3 py-2 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors duration-200">
+           class="block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200"
+           [class]="isDarkMode ? 'text-gray-300 hover:text-cyan-400 hover:bg-gray-700' : 'text-gray-600 hover:text-cyan-500 hover:bg-gray-50'">
           Contacto
         </a>
       </div>

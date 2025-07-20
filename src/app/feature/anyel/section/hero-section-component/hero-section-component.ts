@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ThemeService } from '../../../../core/services/theme-service';
 @Component({
   selector: 'app-hero-section-component',
   standalone: true,
@@ -16,6 +17,8 @@ export class HeroSectionComponent implements OnInit, OnDestroy {
     'Arquitectura en la Nube'
   ];
 
+  isDarkMode = false;
+  isMobileMenuOpen = false;
   displayText: string = '';
   private currentWordIndex: number = 0;
   private isTyping: boolean = false;
@@ -26,14 +29,25 @@ export class HeroSectionComponent implements OnInit, OnDestroy {
   dots: Array<{x: number, y: number, delay: number, duration: number}> = [];
   lines: Array<{x1: number, y1: number, x2: number, y2: number, delay: number}> = [];
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef, private themeService: ThemeService) {}
 
   ngOnInit() {
     this.generateDots();
     this.generateLines();
     this.startTypewriter();
+    this.themeService.isDarkMode$.subscribe(isDark => {
+      this.isDarkMode = isDark;
+    });
   }
 
+
+  toggleDarkMode() {
+    this.themeService.toggleDarkMode();
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
   ngOnDestroy() {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);

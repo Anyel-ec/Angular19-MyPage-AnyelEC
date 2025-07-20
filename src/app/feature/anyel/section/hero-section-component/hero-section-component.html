@@ -1,10 +1,14 @@
-<section class="min-h-screen bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900 relative overflow-hidden flex items-center justify-center">
+<section
+  class="min-h-screen relative overflow-hidden flex items-center justify-center transition-colors duration-300"
+  [class]="isDarkMode ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-slate-900' : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'">
+
   <!-- Fondo con puntitos animados -->
   <div class="absolute inset-0">
     <!-- Patrón de puntos -->
     <div class="absolute inset-0 opacity-30">
       <div *ngFor="let dot of dots; let i = index"
-           class="absolute w-1 h-1 bg-cyan-400 rounded-full animate-pulse"
+           class="absolute w-1 h-1 rounded-full animate-pulse"
+           [class]="isDarkMode ? 'bg-cyan-400' : 'bg-cyan-600'"
            [style.left.%]="dot.x"
            [style.top.%]="dot.y"
            [style.animation-delay]="dot.delay + 's'"
@@ -16,10 +20,15 @@
     <div class="absolute inset-0 opacity-20">
       <svg class="w-full h-full">
         <defs>
-          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id="lineGradientDark" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0" />
             <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:0.5" />
             <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:0" />
+          </linearGradient>
+          <linearGradient id="lineGradientLight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#0891b2;stop-opacity:0" />
+            <stop offset="50%" style="stop-color:#0891b2;stop-opacity:0.7" />
+            <stop offset="100%" style="stop-color:#0891b2;stop-opacity:0" />
           </linearGradient>
         </defs>
         <g *ngFor="let line of lines; let i = index">
@@ -28,7 +37,7 @@
             [attr.y1]="line.y1 + '%'"
             [attr.x2]="line.x2 + '%'"
             [attr.y2]="line.y2 + '%'"
-            stroke="url(#lineGradient)"
+            [attr.stroke]="isDarkMode ? 'url(#lineGradientDark)' : 'url(#lineGradientLight)'"
             stroke-width="1"
             class="animate-pulse"
             [style.animation-delay]="line.delay + 's'">
@@ -38,15 +47,23 @@
     </div>
 
     <!-- Círculos de fondo suaves -->
-    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-pulse"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-slate-400/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+    <div
+      class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse"
+      [class]="isDarkMode ? 'bg-cyan-500/5' : 'bg-cyan-500/10'">
+    </div>
+    <div
+      class="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full blur-3xl animate-pulse delay-1000"
+      [class]="isDarkMode ? 'bg-slate-400/5' : 'bg-slate-600/10'">
+    </div>
   </div>
 
   <!-- Contenido principal -->
   <div class="relative z-10 text-center max-w-6xl mx-auto px-4">
     <!-- Título con efecto typewriter -->
     <div class="mb-8">
-      <h1 class="text-5xl md:text-8xl font-black text-white mb-6 leading-tight">
+      <h1
+        class="text-5xl md:text-8xl font-black mb-6 leading-tight transition-colors duration-300"
+        [class]="isDarkMode ? 'text-white' : 'text-gray-900'">
         Enamorado:
         <br>
         <span class="text-cyan-500 relative inline-block font-mono">
@@ -57,7 +74,9 @@
 
     <!-- Subtítulo -->
     <div class="mb-12">
-      <p class="text-xl md:text-2xl text-slate-300 leading-relaxed max-w-4xl mx-auto">
+      <p
+        class="text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto transition-colors duration-300"
+        [class]="isDarkMode ? 'text-slate-300' : 'text-gray-600'">
         <span class="text-pink-400 animate-pulse">❤️</span>
         Sé una buena persona por encima de todo. | Be a good person above all else.
         <span class="text-pink-400 animate-pulse">❤️</span>
