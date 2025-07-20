@@ -1,0 +1,173 @@
+<div class="min-h-screen bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900 relative overflow-hidden">
+  <!-- Animated background elements -->
+  <div class="absolute inset-0">
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute top-3/4 right-1/4 w-96 h-96 bg-slate-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+    <div class="absolute top-1/2 left-1/2 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
+  </div>
+
+  <!-- Floating particles -->
+  <div class="absolute inset-0">
+    <div *ngFor="let particle of particles; let i = index"
+         class="absolute w-2 h-2 bg-cyan-400/30 rounded-full animate-bounce"
+         [style.left.%]="particle.left"
+         [style.top.%]="particle.top"
+         [style.animation-delay]="particle.delay + 's'"
+         [style.animation-duration]="particle.duration + 's'">
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+    <div class="text-center max-w-4xl mx-auto">
+      <!-- Error number with glitch effect -->
+      <div class="relative mb-8">
+        <h1 class="text-9xl md:text-[12rem] font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-cyan-500 to-slate-300 animate-pulse select-none">
+          500
+        </h1>
+        <div class="absolute inset-0 text-9xl md:text-[12rem] font-black text-red-500/20 animate-ping">
+          500
+        </div>
+      </div>
+
+      <!-- Hero text -->
+      <h2 class="text-4xl md:text-6xl font-bold text-white mb-4 animate-fade-in">
+        ¡Oops! Algo salió mal
+      </h2>
+
+      <!-- Dynamic message -->
+      <div class="mb-8 min-h-[3rem] flex items-center justify-center">
+        <p class="text-xl md:text-2xl text-slate-300 max-w-3xl leading-relaxed animate-fade-in">
+          {{ currentMessage }}
+        </p>
+      </div>
+
+      <!-- Brand -->
+      <div class="mb-8">
+        <span class="text-2xl font-bold text-white">
+          Anyel<span class="text-cyan-500">EC</span>
+        </span>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <button
+          (click)="reloadPage()"
+          class="bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+          Intentar de nuevo
+        </button>
+        <button
+          (click)="openModal()"
+          class="border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 bg-transparent">
+          Contactar Soporte
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div *ngIf="modalOpen" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="w-full max-w-2xl bg-slate-800 border border-slate-600 shadow-2xl rounded-lg">
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold text-white">Formulario de Contacto</h2>
+          <button
+            (click)="closeModal()"
+            class="text-slate-400 hover:text-white p-2 rounded-full hover:bg-slate-700 transition-colors duration-200">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+
+        <form action="https://formspree.io/f/myyqwvvo" method="post" class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-2">
+              <label for="nombre" class="text-sm font-medium text-slate-300 flex items-center gap-2">
+                <i class="fas fa-user text-sm text-cyan-500"></i>
+                Nombre
+              </label>
+              <input
+                type="text"
+                id="nombre"
+                name="Nombre"
+                placeholder="Nombre Completo"
+                required
+                class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300">
+            </div>
+
+            <div class="space-y-2">
+              <label for="pais" class="text-sm font-medium text-slate-300 flex items-center gap-2">
+                <i class="fas fa-globe text-sm text-cyan-500"></i>
+                País
+              </label>
+              <select
+                id="pais"
+                name="pais"
+                required
+                class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300">
+                <option value="" disabled selected>Seleccione una opción</option>
+                <option value="+54">Argentina (+54)</option>
+                <option value="+593">Ecuador (+593)</option>
+                <option value="+57">Colombia (+57)</option>
+                <option value="+51">Perú (+51)</option>
+                <option value="+56">Chile (+56)</option>
+                <option value="+52">México (+52)</option>
+                <option value="+34">España (+34)</option>
+              </select>
+            </div>
+
+            <div class="space-y-2">
+              <label for="celular" class="text-sm font-medium text-slate-300 flex items-center gap-2">
+                <i class="fas fa-phone text-sm text-cyan-500"></i>
+                Celular
+              </label>
+              <input
+                type="text"
+                id="celular"
+                name="Celular"
+                placeholder="0999999999"
+                required
+                class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300">
+            </div>
+
+            <div class="space-y-2">
+              <label for="correo" class="text-sm font-medium text-slate-300 flex items-center gap-2">
+                <i class="fas fa-envelope text-sm text-cyan-500"></i>
+                Correo electrónico
+              </label>
+              <input
+                type="email"
+                id="correo"
+                name="Correo"
+                placeholder="ejemplo@gmail.com"
+                required
+                class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300">
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <label for="mensaje" class="text-sm font-medium text-slate-300 flex items-center gap-2">
+              <i class="fas fa-comment text-sm text-cyan-500"></i>
+              Mensaje
+            </label>
+            <textarea
+              id="mensaje"
+              name="mensaje"
+              rows="4"
+              required
+              placeholder="Describe el problema que encontraste..."
+              class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 resize-none">
+            </textarea>
+          </div>
+
+          <div class="flex justify-center pt-4">
+            <button
+              type="submit"
+              class="bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+              Enviar Mensaje
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
