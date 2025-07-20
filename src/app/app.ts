@@ -5,9 +5,10 @@ import { Footer } from "./layouts/footer/footer/footer";
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { HeroSectionComponent } from './feature/anyel/section/hero-section-component/hero-section-component';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, Footer],
+  imports: [RouterOutlet, HeaderComponent, Footer, HeroSectionComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
