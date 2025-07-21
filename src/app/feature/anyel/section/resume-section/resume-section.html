@@ -1,0 +1,77 @@
+<section
+  class="py-16 transition-colors duration-300"
+  [class]="isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'"
+>
+  <div class="container mx-auto px-4">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h2
+        class="text-4xl md:text-5xl font-light mb-6 text-gray-700 dark:text-gray-400"
+      >
+        Un poquito de mi
+      </h2>
+      <p
+        class="text-lg md:text-xl max-w-4xl mx-auto text-gray-700 dark:text-gray-300"
+      >
+        Me gusta: El campo, los atardeceres, las estrellas, las motocicletas
+        semideportivas, computadoras gamer y las chicas.
+      </p>
+    </div>
+
+    <!-- About Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+      <div
+        *ngFor="let card of aboutCards"
+        class="text-center p-6 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+        [class]="
+          isDarkMode ? 'bg-[#0F1926] ' : 'bg-[#F2F4F7] hover:bg-gray-50 '
+        "
+      >
+        <!-- Icon -->
+        <div class="mb-6">
+          <i [class]="card.icon + ' text-5xl ' + card.iconColor"></i>
+        </div>
+
+        <!-- Title -->
+        <h3
+          class="text-xl font-semibold mb-4"
+          [class]="isDarkMode ? 'text-white' : 'text-gray-800'"
+        >
+          {{ card.title }}
+        </h3>
+
+        <!-- Description -->
+        <p
+          class="text-sm leading-relaxed"
+          [class]="isDarkMode ? 'text-gray-300' : 'text-gray-600'"
+        >
+          {{ card.description }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Company Logos Carousel -->
+    <div class="relative">
+      <h3
+        class="text-2xl font-semibold text-center mb-8"
+        [class]="isDarkMode ? 'text-white' : 'text-gray-800'"
+      >
+        Tecnologías y Certificaciones
+      </h3>
+
+      <!-- Carousel Indicators -->
+      <div class="brand-main-container">
+        <div class="brand-carousel-container">
+          <div class="brand-carousel-track">
+            <div
+              *ngFor="let logo of companyLogos.concat(companyLogos)"
+              class="brand-logo-item shine-effect"
+            >
+              <img [src]="logo.imageUrl" [alt]="logo.alt" class="lazy" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
