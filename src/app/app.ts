@@ -7,9 +7,10 @@ import { filter } from 'rxjs/operators';
 import { HeroSectionComponent } from './feature/anyel/section/hero-section-component/hero-section-component';
 import { AboutMeSection } from './feature/anyel/section/about-me-section/about-me-section';
 import { ResumeSection } from './feature/anyel/section/resume-section/resume-section';
+import { ContactSection } from './feature/anyel/section/contact-section/contact-section';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, Footer, HeroSectionComponent, AboutMeSection, ResumeSection],
+  imports: [RouterOutlet, HeaderComponent, Footer, HeroSectionComponent, AboutMeSection, ResumeSection, ContactSection],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
