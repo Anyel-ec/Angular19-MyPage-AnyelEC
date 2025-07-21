@@ -31,6 +31,16 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    body:not(.styles-loaded) app-root {
+      display: none;
+    }
+  </style>
+  <script>
+  window.addEventListener('load', () => {
+    document.body.classList.add('styles-loaded');
+  });
+</script>
 </head>
 <body>
   <app-root></app-root>
