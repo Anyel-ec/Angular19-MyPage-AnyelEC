@@ -16,6 +16,31 @@
 
       <!-- Navigation y Toggle -->
       <div class="flex items-center space-x-8">
+
+        <!-- Navigation Links -->
+        <nav class="hidden md:flex space-x-4">
+          <a href="/certificaciones"
+             class="px-3 py-2 text-sm font-medium transition-colors duration-200"
+             [class]="isDarkMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-600 hover:text-cyan-500'">
+            Certificaciones
+          </a>
+          <a href="/servicios"
+             class="px-3 py-2 text-sm font-medium transition-colors duration-200"
+             [class]="isDarkMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-600 hover:text-cyan-500'">
+            Servicios
+          </a>
+          <a href="/historia"
+             class="px-3 py-2 text-sm font-medium transition-colors duration-200"
+             [class]="isDarkMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-600 hover:text-cyan-500'">
+            Historia
+          </a>
+          <a href="/contacto"
+             class="px-3 py-2 text-sm font-medium transition-colors duration-200"
+             [class]="isDarkMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-600 hover:text-cyan-500'">
+            Contacto
+          </a>
+        </nav>
+
         <!-- Dark Mode Toggle - ICONOS DENTRO DEL SWITCH -->
         <div class="flex items-center">
           <button
@@ -42,30 +67,6 @@
             </span>
           </button>
         </div>
-
-        <!-- Navigation Links -->
-        <nav class="hidden md:flex space-x-8">
-          <a href="/certificaciones"
-             class="px-3 py-2 text-sm font-medium transition-colors duration-200"
-             [class]="isDarkMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-600 hover:text-cyan-500'">
-            Certificaciones
-          </a>
-          <a href="/servicios"
-             class="px-3 py-2 text-sm font-medium transition-colors duration-200"
-             [class]="isDarkMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-600 hover:text-cyan-500'">
-            Servicios
-          </a>
-          <a href="/historia"
-             class="px-3 py-2 text-sm font-medium transition-colors duration-200"
-             [class]="isDarkMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-600 hover:text-cyan-500'">
-            Historia
-          </a>
-          <a href="/contacto"
-             class="px-3 py-2 text-sm font-medium transition-colors duration-200"
-             [class]="isDarkMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-600 hover:text-cyan-500'">
-            Contacto
-          </a>
-        </nav>
 
         <!-- Mobile menu button -->
         <div class="md:hidden">

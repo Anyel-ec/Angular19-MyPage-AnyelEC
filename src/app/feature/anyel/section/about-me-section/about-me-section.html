@@ -1,0 +1,90 @@
+<div class="min-h-screen transition-colors duration-300"
+     [class]="isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'">
+
+
+  <!-- Main Content -->
+  <div class="container mx-auto px-4 py-16">
+    <div class="text-center">
+
+      <!-- Header Title -->
+      <h1 class="text-4xl md:text-6xl font-light mb-8 tracking-wider text-gray-500 dark:text-gray-400">
+        ANGEL PAUL PATIÑO DIAZ
+      </h1>
+
+      <!-- University Info -->
+      <div class="mb-8">
+        <p class="text-lg mb-2">Universidad de las Fuerzas Armadas ESPE</p>
+        <p class="text-lg">Ing. en Tecnologías de la Información</p>
+      </div>
+
+      <!-- Profile Section -->
+      <div class="max-w-md mx-auto">
+
+        <!-- Profile Image -->
+        <div class="mb-6">
+          <picture>
+            <source srcset="./anyel.webp" type="image/webp">
+            <img class="mx-auto rounded-full w-48 h-48 object-cover border-4 border-gray-300 dark:border-gray-600"
+                 src="./anyel.jpg"
+                 alt="Anyel EC (Imagen de Perfil)">
+          </picture>
+        </div>
+
+        <!-- Name and Description -->
+        <h4 class="text-2xl font-semibold mb-2">Anyel EC</h4>
+        <p class="text-lg mb-6 text-gray-600 dark:text-gray-400">Redes sociales</p>
+
+        <!-- Social Media Links -->
+        <div class="flex justify-center space-x-4 mb-8">
+
+          <!-- WhatsApp -->
+          <button (click)="openLink('https://api.whatsapp.com/send?phone=593991675490&text=Hola%2C%20muy%20buen%20d%C3%ADa.%20%0AConsegu%C3%AD%20este%20n%C3%BAmero%20en%20tu%20sitio%20web.%20')"
+                  class="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  [class]="isDarkMode ? 'bg-gray-800 hover:bg-gray-700 text-white' : 'bg-gray-800 hover:bg-gray-700 text-white'"
+                  aria-label="WhatsApp">
+            <i class="fab fa-whatsapp text-lg"></i>
+          </button>
+
+          <!-- Facebook -->
+          <button (click)="openLink('https://www.facebook.com/profile.php?id=61552032335826')"
+                  class="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  [class]="isDarkMode ? 'bg-gray-800 hover:bg-gray-700 text-white' : 'bg-gray-800 hover:bg-gray-700 text-white'"
+                  aria-label="Facebook">
+            <i class="fab fa-facebook-f text-lg"></i>
+          </button>
+
+          <!-- LinkedIn -->
+          <button (click)="openLink('https://www.linkedin.com/in/angel-pati%C3%B1o/')"
+                  class="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  [class]="isDarkMode ? 'bg-gray-800 hover:bg-gray-700 text-white' : 'bg-gray-800 hover:bg-gray-700 text-white'"
+                  aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in text-lg"></i>
+          </button>
+
+          <!-- GitHub -->
+          <button (click)="openLink('https://github.com/Anyel-ec/')"
+                  class="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  [class]="isDarkMode ? 'bg-gray-800 hover:bg-gray-700 text-white' : 'bg-gray-800 hover:bg-gray-700 text-white'"
+                  aria-label="GitHub">
+            <i class="fab fa-github text-lg"></i>
+          </button>
+
+          <!-- TikTok -->
+          <button (click)="openLink('https://www.tiktok.com/@anyel.ec')"
+                  class="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  [class]="isDarkMode ? 'bg-gray-800 hover:bg-gray-700 text-white' : 'bg-gray-800 hover:bg-gray-700 text-white'"
+                  aria-label="TikTok">
+            <i class="fab fa-tiktok text-lg"></i>
+          </button>
+
+        </div>
+
+        <!-- Footer Message -->
+        <p class="text-lg text-gray-600 dark:text-gray-400">
+          Que tengas un excelente día.
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
