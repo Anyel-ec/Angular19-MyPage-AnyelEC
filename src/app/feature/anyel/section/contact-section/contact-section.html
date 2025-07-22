@@ -1,17 +1,13 @@
 <section class="py-16 transition-colors duration-300"
-         [class]="isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'">
+         [class]="isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'">
 
-  <div class="container mx-auto px-4 max-w-7xl">
+  <div class="container mx-auto px-4 max-w-6xl">
 
-    <!-- Header con animación -->
+    <!-- Simple Header -->
     <div class="text-center mb-12 animate-fade-in">
-      <h2 class="text-4xl md:text-5xl font-light mb-4 text-gray-500 dark:text-gray-400">
+      <h1 class="text-4xl md:text-5xl font-light mb-4 text-gray-500 dark:text-gray-400">
         Formulario de Contacto
-      </h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full"></div>
-      <p class="mt-6 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-        ¿Tienes alguna pregunta o propuesta? ¡Me encantaría escucharte! Completa el formulario y te responderé lo antes posible.
-      </p>
+      </h1>
     </div>
 
     <!-- Success Message -->
@@ -29,202 +25,161 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
 
-      <!-- Social Links Section -->
-      <div class="lg:col-span-1">
-        <div class="sticky top-8">
-          <div class="p-8 rounded-2xl shadow-xl backdrop-blur-sm animate-slide-up"
-               [class]="isDarkMode ? 'bg-gray-800/80 border border-gray-700' : 'bg-white/80 border border-gray-200'">
+      <!-- Social Links Section - Simple -->
+      <div class="lg:col-span-1 animate-slide-up">
+        <h2 class="text-2xl font-semibold mb-8" [class]="isDarkMode ? 'text-white' : 'text-gray-800'">
+          Redes Sociales
+        </h2>
 
-            <h3 class="text-2xl font-semibold mb-8 flex items-center">
-              <i class="fas fa-share-alt text-cyan-400 mr-3"></i>
-              Redes Sociales
-            </h3>
+        <div class="space-y-6">
+          <div *ngFor="let social of socialLinks; let i = index"
+               class="group cursor-pointer transition-all duration-300 hover:scale-105"
+               [style.animation-delay]="i * 100 + 'ms'"
+               (click)="openSocialLink(social.link)">
 
-            <div class="space-y-6">
-              <div *ngFor="let social of socialLinks; let i = index"
-                   class="group cursor-pointer transform transition-all duration-300 hover:scale-105"
-                   [style.animation-delay]="i * 100 + 'ms'"
-                   (click)="openSocialLink(social.link)">
-
-                <div class="flex items-center p-4 rounded-xl transition-all duration-300"
-                     [class]="isDarkMode ? 'hover:bg-gray-700/50' : 'hover:bg-gray-50'">
-
-                  <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300"
-                       [class]="isDarkMode ? 'bg-gray-700 group-hover:bg-cyan-600' : 'bg-gray-100 group-hover:bg-cyan-500'">
-                    <i [class]="social.icon + ' text-lg transition-colors duration-300 ' + social.color + ' group-hover:text-white'"></i>
-                  </div>
-
-                  <div class="ml-4 flex-1">
-                    <p class="text-sm font-medium" [class]="isDarkMode ? 'text-gray-300' : 'text-gray-600'">
-                      {{ social.label }}
-                    </p>
-                    <p class="font-semibold transition-colors duration-300"
-                       [class]="isDarkMode ? 'text-white group-hover:text-cyan-300' : 'text-gray-900 group-hover:text-cyan-600'">
-                      {{ social.value }}
-                    </p>
-                  </div>
-
-                  <i class="fas fa-external-link-alt text-gray-400 group-hover:text-cyan-400 transition-colors duration-300"></i>
-                </div>
-              </div>
-            </div>
-
-            <!-- Decorative element -->
-            <div class="mt-8 pt-6 border-t" [class]="isDarkMode ? 'border-gray-700' : 'border-gray-200'">
-              <div class="flex justify-center">
-                <div class="w-16 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></div>
+            <div class="flex items-center">
+              <i [class]="social.icon + ' text-2xl text-cyan-400 hover:text-cyan-300 transition-colors duration-300 mr-4'"></i>
+              <div>
+                <p class="text-sm font-medium" [class]="isDarkMode ? 'text-gray-300' : 'text-gray-600'">
+                  {{ social.label }}
+                </p>
+                <p class="font-semibold transition-colors duration-300"
+                   [class]="isDarkMode ? 'text-white group-hover:text-cyan-300' : 'text-gray-900 group-hover:text-cyan-600'">
+                  {{ social.value }}
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Contact Form Section -->
-      <div class="lg:col-span-2">
-        <div class="p-8 rounded-2xl shadow-xl backdrop-blur-sm animate-slide-up"
-             [class]="isDarkMode ? 'bg-gray-800/80 border border-gray-700' : 'bg-white/80 border border-gray-200'"
-             style="animation-delay: 200ms;">
+      <!-- Contact Form Section - Simple -->
+      <div class="lg:col-span-2 animate-slide-up" style="animation-delay: 200ms;">
 
-          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-6">
 
-            <!-- Name and Country Row -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Name and Country Row -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-              <!-- Name Field -->
-              <div class="form-group">
-                <label for="name" class="block text-sm font-semibold mb-2"
-                       [class]="isDarkMode ? 'text-gray-200' : 'text-gray-700'">
-                  Nombre: <span class="text-red-500">*</span>
-                </label>
-                <div class="relative">
-                  <input type="text"
-                         id="name"
-                         formControlName="name"
-                         placeholder="Nombre Completo"
-                         class="w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent"
-                         [class]="isFieldInvalid('name')
-                           ? (isDarkMode ? 'bg-gray-700 border-red-500 text-white placeholder-gray-400' : 'bg-white border-red-500 text-gray-900 placeholder-gray-500')
-                           : (isDarkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:bg-gray-600' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:bg-gray-50')">
-                  <i class="fas fa-user absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                </div>
-                <p *ngIf="getFieldError('name')" class="text-red-500 text-sm mt-1 animate-shake">
-                  {{ getFieldError('name') }}
-                </p>
-              </div>
-
-              <!-- Country Field -->
-              <div class="form-group">
-                <label for="country" class="block text-sm font-semibold mb-2"
-                       [class]="isDarkMode ? 'text-gray-200' : 'text-gray-700'">
-                  País: <span class="text-red-500">*</span>
-                </label>
-                <div class="relative">
-                  <select id="country"
-                          formControlName="country"
-                          class="w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent appearance-none cursor-pointer"
-                          [class]="isFieldInvalid('country')
-                            ? (isDarkMode ? 'bg-gray-700 border-red-500 text-white' : 'bg-white border-red-500 text-gray-900')
-                            : (isDarkMode ? 'bg-gray-700 border-gray-600 text-white focus:bg-gray-600' : 'bg-white border-gray-300 text-gray-900 focus:bg-gray-50')">
-                    <option value="">Seleccione una opción</option>
-                    <option *ngFor="let country of countries" [value]="country.code">
-                      {{ country.flag }} {{ country.name }}
-                    </option>
-                  </select>
-                  <i class="fas fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
-                </div>
-                <p *ngIf="getFieldError('country')" class="text-red-500 text-sm mt-1 animate-shake">
-                  {{ getFieldError('country') }}
-                </p>
-              </div>
-            </div>
-
-            <!-- Phone and Email Row -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-              <!-- Phone Field -->
-              <div class="form-group">
-                <label for="phone" class="block text-sm font-semibold mb-2"
-                       [class]="isDarkMode ? 'text-gray-200' : 'text-gray-700'">
-                  Celular: <span class="text-red-500">*</span>
-                </label>
-                <div class="relative">
-                  <input type="tel"
-                         id="phone"
-                         formControlName="phone"
-                         placeholder="0999999999"
-                         class="w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent"
-                         [class]="isFieldInvalid('phone')
-                           ? (isDarkMode ? 'bg-gray-700 border-red-500 text-white placeholder-gray-400' : 'bg-white border-red-500 text-gray-900 placeholder-gray-500')
-                           : (isDarkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:bg-gray-600' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:bg-gray-50')">
-                  <i class="fas fa-phone absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                </div>
-                <p *ngIf="getFieldError('phone')" class="text-red-500 text-sm mt-1 animate-shake">
-                  {{ getFieldError('phone') }}
-                </p>
-              </div>
-
-              <!-- Email Field -->
-              <div class="form-group">
-                <label for="email" class="block text-sm font-semibold mb-2"
-                       [class]="isDarkMode ? 'text-gray-200' : 'text-gray-700'">
-                  Correo electrónico: <span class="text-red-500">*</span>
-                </label>
-                <div class="relative">
-                  <input type="email"
-                         id="email"
-                         formControlName="email"
-                         placeholder="ejemplo@gmail.com"
-                         class="w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent"
-                         [class]="isFieldInvalid('email')
-                           ? (isDarkMode ? 'bg-gray-700 border-red-500 text-white placeholder-gray-400' : 'bg-white border-red-500 text-gray-900 placeholder-gray-500')
-                           : (isDarkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:bg-gray-600' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:bg-gray-50')">
-                  <i class="fas fa-envelope absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                </div>
-                <p *ngIf="getFieldError('email')" class="text-red-500 text-sm mt-1 animate-shake">
-                  {{ getFieldError('email') }}
-                </p>
-              </div>
-            </div>
-
-            <!-- Message Field -->
+            <!-- Name Field -->
             <div class="form-group">
-              <label for="message" class="block text-sm font-semibold mb-2"
+              <label for="name" class="block text-sm font-semibold mb-2"
                      [class]="isDarkMode ? 'text-gray-200' : 'text-gray-700'">
-                Mensaje: <span class="text-red-500">*</span>
+                Nombre: <span class="text-red-500">*</span>
               </label>
-              <div class="relative">
-                <textarea id="message"
-                          formControlName="message"
-                          rows="5"
-                          placeholder="Escribe tu mensaje aquí..."
-                          class="w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent resize-none"
-                          [class]="isFieldInvalid('message')
-                            ? (isDarkMode ? 'bg-gray-700 border-red-500 text-white placeholder-gray-400' : 'bg-white border-red-500 text-gray-900 placeholder-gray-500')
-                            : (isDarkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:bg-gray-600' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:bg-gray-50')"></textarea>
-                <i class="fas fa-comment-alt absolute right-3 top-3 text-gray-400"></i>
-              </div>
-              <p *ngIf="getFieldError('message')" class="text-red-500 text-sm mt-1 animate-shake">
-                {{ getFieldError('message') }}
+              <input type="text"
+                     id="name"
+                     formControlName="name"
+                     placeholder="Nombre Completo"
+                     class="w-full px-4 py-3 border-2 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent"
+                     [class]="isFieldInvalid('name')
+                       ? (isDarkMode ? 'bg-gray-800 border-red-500 text-white placeholder-gray-400' : 'bg-white border-red-500 text-gray-900 placeholder-gray-500')
+                       : (isDarkMode ? 'bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:bg-gray-700' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:bg-gray-50')">
+              <p *ngIf="getFieldError('name')" class="text-red-500 text-sm mt-1 animate-shake">
+                {{ getFieldError('name') }}
               </p>
             </div>
 
-            <!-- Submit Button -->
-            <div class="flex justify-end pt-4">
-              <button type="submit"
-                      [disabled]="isSubmitting"
-                      class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-cyan-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
-                <span *ngIf="!isSubmitting" class="flex items-center">
-                  <i class="fas fa-paper-plane mr-2"></i>
-                  Enviar
-                </span>
-                <span *ngIf="isSubmitting" class="flex items-center">
-                  <i class="fas fa-spinner fa-spin mr-2"></i>
-                  Enviando...
-                </span>
-              </button>
+            <!-- Country Field -->
+            <div class="form-group">
+              <label for="country" class="block text-sm font-semibold mb-2"
+                     [class]="isDarkMode ? 'text-gray-200' : 'text-gray-700'">
+                País: <span class="text-red-500">*</span>
+              </label>
+              <select id="country"
+                      formControlName="country"
+                      class="w-full px-4 py-3 border-2 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent appearance-none cursor-pointer"
+                      [class]="isFieldInvalid('country')
+                        ? (isDarkMode ? 'bg-gray-800 border-red-500 text-white' : 'bg-white border-red-500 text-gray-900')
+                        : (isDarkMode ? 'bg-gray-800 border-gray-600 text-white focus:bg-gray-700' : 'bg-white border-gray-300 text-gray-900 focus:bg-gray-50')">
+                <option value="">Seleccione una opción</option>
+                <option *ngFor="let country of countries" [value]="country.code">
+                  {{ country.flag }} {{ country.name }}
+                </option>
+              </select>
+              <p *ngIf="getFieldError('country')" class="text-red-500 text-sm mt-1 animate-shake">
+                {{ getFieldError('country') }}
+              </p>
             </div>
-          </form>
-        </div>
+          </div>
+
+          <!-- Phone and Email Row -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Phone Field -->
+            <div class="form-group">
+              <label for="phone" class="block text-sm font-semibold mb-2"
+                     [class]="isDarkMode ? 'text-gray-200' : 'text-gray-700'">
+                Celular: <span class="text-red-500">*</span>
+              </label>
+              <input type="tel"
+                     id="phone"
+                     formControlName="phone"
+                     placeholder="0999999999"
+                     class="w-full px-4 py-3 border-2 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent"
+                     [class]="isFieldInvalid('phone')
+                       ? (isDarkMode ? 'bg-gray-800 border-red-500 text-white placeholder-gray-400' : 'bg-white border-red-500 text-gray-900 placeholder-gray-500')
+                       : (isDarkMode ? 'bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:bg-gray-700' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:bg-gray-50')">
+              <p *ngIf="getFieldError('phone')" class="text-red-500 text-sm mt-1 animate-shake">
+                {{ getFieldError('phone') }}
+              </p>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group">
+              <label for="email" class="block text-sm font-semibold mb-2"
+                     [class]="isDarkMode ? 'text-gray-200' : 'text-gray-700'">
+                Correo electrónico: <span class="text-red-500">*</span>
+              </label>
+              <input type="email"
+                     id="email"
+                     formControlName="email"
+                     placeholder="ejemplo@gmail.com"
+                     class="w-full px-4 py-3 border-2 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent"
+                     [class]="isFieldInvalid('email')
+                       ? (isDarkMode ? 'bg-gray-800 border-red-500 text-white placeholder-gray-400' : 'bg-white border-red-500 text-gray-900 placeholder-gray-500')
+                       : (isDarkMode ? 'bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:bg-gray-700' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:bg-gray-50')">
+              <p *ngIf="getFieldError('email')" class="text-red-500 text-sm mt-1 animate-shake">
+                {{ getFieldError('email') }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Message Field -->
+          <div class="form-group">
+            <label for="message" class="block text-sm font-semibold mb-2"
+                   [class]="isDarkMode ? 'text-gray-200' : 'text-gray-700'">
+              Mensaje: <span class="text-red-500">*</span>
+            </label>
+            <textarea id="message"
+                      formControlName="message"
+                      rows="5"
+                      placeholder="Escribe tu mensaje aquí..."
+                      class="w-full px-4 py-3 border-2 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent resize-none"
+                      [class]="isFieldInvalid('message')
+                        ? (isDarkMode ? 'bg-gray-800 border-red-500 text-white placeholder-gray-400' : 'bg-white border-red-500 text-gray-900 placeholder-gray-500')
+                        : (isDarkMode ? 'bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:bg-gray-700' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:bg-gray-50')"></textarea>
+            <p *ngIf="getFieldError('message')" class="text-red-500 text-sm mt-1 animate-shake">
+              {{ getFieldError('message') }}
+            </p>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="flex justify-end pt-4">
+            <button type="submit"
+                    [disabled]="isSubmitting"
+                    class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-cyan-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+              <span *ngIf="!isSubmitting" class="flex items-center">
+                <i class="fas fa-paper-plane mr-2"></i>
+                Enviar
+              </span>
+              <span *ngIf="isSubmitting" class="flex items-center">
+                <i class="fas fa-spinner fa-spin mr-2"></i>
+                Enviando...
+              </span>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
