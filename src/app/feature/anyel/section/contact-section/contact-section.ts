@@ -23,14 +23,14 @@ export class ContactSection {
   private themeSubscription?: Subscription;
 
   countries: Country[] = [
-    { code: 'EC', name: 'Ecuador', flag: '🇪🇨' },
-    { code: 'US', name: 'Estados Unidos', flag: '🇺🇸' },
-    { code: 'CO', name: 'Colombia', flag: '🇨🇴' },
-    { code: 'PE', name: 'Perú', flag: '🇵🇪' },
-    { code: 'MX', name: 'México', flag: '🇲🇽' },
-    { code: 'AR', name: 'Argentina', flag: '🇦🇷' },
-    { code: 'ES', name: 'España', flag: '🇪🇸' },
-    { code: 'OTHER', name: 'Otro', flag: '🌍' },
+    { code: 'EC', name: 'Ecuador', flag: '' },
+    { code: 'US', name: 'Estados Unidos', flag: '' },
+    { code: 'CO', name: 'Colombia', flag: '' },
+    { code: 'PE', name: 'Perú', flag: '' },
+    { code: 'MX', name: 'México', flag: '' },
+    { code: 'AR', name: 'Argentina', flag: '' },
+    { code: 'ES', name: 'España', flag: '' },
+    { code: 'OTHER', name: 'Otro', flag: '' },
   ];
 
   socialLinks: SocialLink[] = [
