@@ -1,16 +1,19 @@
-import { Component, type OnInit } from '@angular/core';
+import { Component, type OnInit, type OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { FigletService } from '../services/figlet-service';
 import { Title, Meta } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
+import { FigletService } from '../services/figlet-service';
+import { ThemeService } from '../../../core/services/theme-service';
 
 @Component({
-  selector: 'app-banner-springboot-component',
+  selector: 'app-banner-generator',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './banner-springboot-component.html',
-  styleUrl: './banner-springboot-component.scss',
+  styleUrls: ['./banner-springboot-component.scss'],
 })
-export class BannerSpringbootComponent implements OnInit {
+export class BannerSpringbootComponent implements OnInit, OnDestroy {
   bannerText = 'Welcome';
   captionEnabled = true;
   captionText =
@@ -32,8 +35,12 @@ export class BannerSpringbootComponent implements OnInit {
   generatedBanner = '';
   isLoading = false;
   showCopySuccess = false;
+  isDarkMode = false;
+  private themeSubscription?: Subscription;
 
-  availableFonts = [{ value: 'standard', name: 'Standard' }];
+  availableFonts = [
+    { value: 'standard', name: 'Standard' },
+  ];
 
   availableColors = [
     {
@@ -81,23 +88,59 @@ export class BannerSpringbootComponent implements OnInit {
     },
   ];
 
-  constructor(private figletService: FigletService, private titleService: Title, private metaService: Meta) {}
+  constructor(
+    private figletService: FigletService,
+    private titleService: Title,
+    private metaService: Meta,
+    private themeService: ThemeService
+  ) {}
 
   ngOnInit() {
     this.generateBanner();
-    this.titleService.setTitle('Spring Boot Banner Generator - Anyel EC');
+    this.setupSEO();
+    this.setupTheme();
+  }
 
+  ngOnDestroy() {
+    if (this.themeSubscription) {
+      this.themeSubscription.unsubscribe();
+    }
+  }
+
+  private setupSEO() {
+    this.titleService.setTitle('Spring Boot Banner Generator - Anyel EC');
     this.metaService.updateTag({
       name: 'description',
-      content: 'Genera banners ASCII personalizados para Spring Boot con diferentes fuentes y colores.'
+      content:
+        'Genera banners ASCII personalizados para Spring Boot con diferentes fuentes y colores.',
     });
-    this.metaService.updateTag({ name: 'keywords', content: 'Spring Boot, Banner, ASCII, Anyel EC, Figlet Fonts' });
+    this.metaService.updateTag({
+      name: 'keywords',
+      content: 'Spring Boot, Banner, ASCII, Anyel EC, Figlet Fonts',
+    });
     this.metaService.updateTag({ name: 'robots', content: 'index, follow' });
-
-    this.metaService.updateTag({ property: 'og:title', content: 'Spring Boot Banner Generator' });
-    this.metaService.updateTag({ property: 'og:description', content: 'Genera banners ASCII personalizados para tus proyectos Spring Boot.' });
-    this.metaService.updateTag({ property: 'og:url', content: 'https://www.anyel.top/banner-springboot' });
+    this.metaService.updateTag({
+      property: 'og:title',
+      content: 'Spring Boot Banner Generator',
+    });
+    this.metaService.updateTag({
+      property: 'og:description',
+      content:
+        'Genera banners ASCII personalizados para tus proyectos Spring Boot.',
+    });
+    this.metaService.updateTag({
+      property: 'og:url',
+      content: 'https://www.anyel.top/banner-springboot',
+    });
     this.metaService.updateTag({ property: 'og:type', content: 'website' });
+  }
+
+  private setupTheme() {
+    this.themeSubscription = this.themeService.isDarkMode$.subscribe(
+      (isDark) => {
+        this.isDarkMode = isDark;
+      }
+    );
   }
 
   async generateBanner() {
@@ -135,15 +178,43 @@ export class BannerSpringbootComponent implements OnInit {
     return color ? color.class : 'text-blue-600';
   }
 
-  copyToClipboard() {
-    const fullBanner = this.getFullBannerWithAnsiColors();
-    navigator.clipboard.writeText(fullBanner).then(() => {
-      // Mostrar notificación de éxito
+  async copyToClipboard() {
+    try {
+      const fullBanner = this.getFullBannerWithAnsiColors();
+      await navigator.clipboard.writeText(fullBanner);
+
+      this.showCopySuccess = true;
+      setTimeout(() => {
+        this.showCopySuccess = false;
+      }, 1000);
+    } catch (error) {
+      console.error('Error copying to clipboard:', error);
+      // Fallback para navegadores que no soportan clipboard API
+      this.fallbackCopyToClipboard(this.getFullBannerWithAnsiColors());
+    }
+  }
+
+  private fallbackCopyToClipboard(text: string) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+      document.execCommand('copy');
       this.showCopySuccess = true;
       setTimeout(() => {
         this.showCopySuccess = false;
       }, 2000);
-    });
+    } catch (error) {
+      console.error('Fallback copy failed:', error);
+    } finally {
+      document.body.removeChild(textArea);
+    }
   }
 
   downloadBanner() {
@@ -178,7 +249,6 @@ export class BannerSpringbootComponent implements OnInit {
     return result;
   }
 
-  // Método para obtener las líneas de información adicional con colores para preview
   getAdditionalInfoLines(): Array<{ text: string; colorClass: string }> {
     if (!this.additionalInfoEnabled || !this.additionalInfoText.trim()) {
       return [];
@@ -210,6 +280,7 @@ export class BannerSpringbootComponent implements OnInit {
 
     return result;
   }
+
   get selectedAnsiColor(): string {
     const color = this.availableColors.find(
       (c) => c.value === this.selectedColor

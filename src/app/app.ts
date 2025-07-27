@@ -16,6 +16,7 @@ import { ContactSection } from './feature/anyel/section/contact-section/contact-
 })
 export class App {
   showLayout = true;
+currentRoute: string = '';
 
   constructor(private router: Router) {}
 
@@ -24,7 +25,7 @@ export class App {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        this.showLayout = !['/500', '/projects/banner-springboot'].includes(event.urlAfterRedirects);
+        this.showLayout = !['/500', '/projects/banner-spring'].includes(event.urlAfterRedirects);
 
       });
   }

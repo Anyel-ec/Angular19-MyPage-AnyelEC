@@ -1,335 +1,351 @@
-<div class="container mx-auto px-4 py-8 max-w-6xl">
-  <!-- Header -->
-  <div class="text-center mb-8">
-    <h1 class="text-3xl font-bold text-gray-800 mb-2">
-      <i class="fas fa-leaf text-green-600 mr-2"></i>
-      Spring Boot Banner Generator
-    </h1>
-    <p class="text-gray-600">
-      Online Spring Boot Banner Generator (with FIGlet Fonts)
-    </p>
-  </div>
+<div
+  class="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300"
+>
+  <div class="container mx-auto px-4 py-8 max-w-6xl">
+    <!-- Header Simple - Sin toggle de tema -->
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">
+        <i class="fas fa-leaf text-green-600 mr-2"></i>
+        Spring Boot Banner Generator
+      </h1>
+      <p class="text-gray-600 dark:text-gray-300">
+        Online Spring Boot Banner Generator (with FIGlet Fonts)
+      </p>
+    </div>
 
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-    <!-- Configuration Panel -->
-    <div class="bg-white rounded-lg shadow-lg p-6">
-      <h2 class="text-xl font-semibold text-gray-800 mb-6">
-        <i class="fas fa-cog text-gray-600 mr-2"></i>
-        Configuration
-      </h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Configuration Panel -->
+      <div
+        class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-colors duration-300"
+      >
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-6">
+          <i class="fas fa-cog text-gray-600 dark:text-gray-400 mr-2"></i>
+          Configuration
+        </h2>
 
-      <!-- Banner Text -->
-      <div class="mb-6">
-        <label
-          for="bannerText"
-          class="block text-sm font-medium text-gray-700 mb-2"
-        >
-          <i class="fas fa-font mr-1"></i>
-          Banner Text
-        </label>
-        <input
-          type="text"
-          id="bannerText"
-          [(ngModel)]="bannerText"
-          (input)="onTextChange()"
-          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder="Enter your banner text"
-        />
-      </div>
-
-      <!-- Caption Toggle -->
-      <div class="mb-4">
-        <label class="flex items-center cursor-pointer">
-          <div class="relative">
-            <input
-              type="checkbox"
-              [(ngModel)]="captionEnabled"
-              class="sr-only"
-            />
-            <div
-              class="block bg-gray-600 w-14 h-8 rounded-full"
-              [class.bg-blue-600]="captionEnabled"
-            ></div>
-            <div
-              class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition transform"
-              [class.translate-x-6]="captionEnabled"
-            ></div>
-          </div>
-          <div class="ml-3 text-gray-700 font-medium">
-            <i class="fas fa-comment-alt mr-1"></i>
-            Caption
-          </div>
-        </label>
-      </div>
-
-      <!-- Caption Text -->
-      <div class="mb-6" *ngIf="captionEnabled">
-        <label
-          for="captionText"
-          class="block text-sm font-medium text-gray-700 mb-2"
-        >
-          <i class="fas fa-edit mr-1"></i>
-          Caption Text
-        </label>
-        <textarea
-          id="captionText"
-          [(ngModel)]="captionText"
-          rows="3"
-          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder="Enter caption text with Spring Boot variables"
-        ></textarea>
-        <p class="text-xs text-gray-500 mt-1">
-          <i class="fas fa-info-circle mr-1"></i>
-          Use variables like &#36;&#123;application.title&#125;,
-          &#36;&#123;application.version&#125;,
-          &#36;&#123;spring-boot.version&#125;
-        </p>
-      </div>
-
-      <!-- Additional Info Toggle -->
-      <div class="mb-4">
-        <label class="flex items-center cursor-pointer">
-          <div class="relative">
-            <input
-              type="checkbox"
-              [(ngModel)]="additionalInfoEnabled"
-              class="sr-only"
-            />
-            <div
-              class="block bg-gray-600 w-14 h-8 rounded-full"
-              [class.bg-blue-600]="additionalInfoEnabled"
-            ></div>
-            <div
-              class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition transform"
-              [class.translate-x-6]="additionalInfoEnabled"
-            ></div>
-          </div>
-          <div class="ml-3 text-gray-700 font-medium">
-            <i class="fas fa-info-circle mr-1"></i>
-            Additional Spring Boot Info
-          </div>
-        </label>
-        <p class="text-xs text-gray-500 mt-1 ml-17">
-          Include project details, team info, and repository information
-        </p>
-      </div>
-
-      <!-- Additional Info Text -->
-      <div class="mb-6" *ngIf="additionalInfoEnabled">
-        <label
-          for="additionalInfoText"
-          class="block text-sm font-medium text-gray-700 mb-2"
-        >
-          <i class="fas fa-list-alt mr-1"></i>
-          Additional Information Text
-        </label>
-        <textarea
-          id="additionalInfoText"
-          [(ngModel)]="additionalInfoText"
-          rows="8"
-          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono text-sm"
-          placeholder="Enter additional Spring Boot information"
-        ></textarea>
-        <p class="text-xs text-gray-500 mt-1">
-          <i class="fas fa-info-circle mr-1"></i>
-          Customize project details, team information, and repository data
-        </p>
-      </div>
-
-      <!-- Banner Font -->
-      <div class="mb-6">
-        <label
-          for="bannerFont"
-          class="block text-sm font-medium text-gray-700 mb-2"
-        >
-          <i class="fas fa-text-height mr-1"></i>
-          Banner Font
-        </label>
-        <select
-          id="bannerFont"
-          [(ngModel)]="selectedFont"
-          (change)="onFontChange()"
-          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        >
-          <option *ngFor="let font of availableFonts" [value]="font.value">
-            {{ font.name }}
-          </option>
-        </select>
-      </div>
-
-      <!-- Color Selection -->
-      <div class="mb-6">
-        <label class="block text-sm font-medium text-gray-700 mb-2">
-          <i class="fas fa-palette mr-1"></i>
-          Banner Color
-        </label>
-        <div class="grid grid-cols-4 gap-2">
-          <button
-            *ngFor="let color of availableColors"
-            (click)="selectedColor = color.value"
-            class="p-2 rounded-md border-2 transition-all duration-200 hover:scale-105"
-            [class]="
-              selectedColor === color.value
-                ? 'border-gray-800 bg-gray-100'
-                : 'border-gray-200 hover:border-gray-300'
-            "
+        <!-- Banner Text -->
+        <div class="mb-6">
+          <label
+            for="bannerText"
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
           >
-            <div class="w-6 h-6 rounded mx-auto" [ngClass]="color.class">
-              <i class="fas fa-circle"></i>
+            <i class="fas fa-font mr-1"></i>
+            Banner Text
+          </label>
+          <input
+            type="text"
+            id="bannerText"
+            [(ngModel)]="bannerText"
+            (input)="onTextChange()"
+            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200"
+            placeholder="Enter your banner text"
+          />
+        </div>
+
+        <!-- Caption Toggle -->
+        <div class="mb-4">
+          <label class="flex items-center cursor-pointer">
+            <div class="relative">
+              <input
+                type="checkbox"
+                [(ngModel)]="captionEnabled"
+                class="sr-only"
+              />
+              <div
+                class="block bg-gray-600 w-14 h-8 rounded-full"
+                [class.bg-blue-600]="captionEnabled"
+              ></div>
+              <div
+                class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition transform"
+                [class.translate-x-6]="captionEnabled"
+              ></div>
             </div>
-            <span class="text-xs text-gray-600 mt-1 block">{{
-              color.name
-            }}</span>
+            <div class="ml-3 text-gray-700 dark:text-gray-300 font-medium">
+              <i class="fas fa-comment-alt mr-1"></i>
+              Caption
+            </div>
+          </label>
+        </div>
+
+        <!-- Caption Text -->
+        <div class="mb-6" *ngIf="captionEnabled">
+          <label
+            for="captionText"
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          >
+            <i class="fas fa-edit mr-1"></i>
+            Caption Text
+          </label>
+          <textarea
+            id="captionText"
+            [(ngModel)]="captionText"
+            rows="3"
+            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200"
+            placeholder="Enter caption text with Spring Boot variables"
+          ></textarea>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <i class="fas fa-info-circle mr-1"></i>
+            Use variables like &#36;&#123;application.title&#125;,
+            &#36;&#123;application.version&#125;,
+            &#36;&#123;spring-boot.version&#125;
+          </p>
+        </div>
+
+        <!-- Additional Info Toggle -->
+        <div class="mb-4">
+          <label class="flex items-center cursor-pointer">
+            <div class="relative">
+              <input
+                type="checkbox"
+                [(ngModel)]="additionalInfoEnabled"
+                class="sr-only"
+              />
+              <div
+                class="block bg-gray-600 w-14 h-8 rounded-full"
+                [class.bg-blue-600]="additionalInfoEnabled"
+              ></div>
+              <div
+                class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition transform"
+                [class.translate-x-6]="additionalInfoEnabled"
+              ></div>
+            </div>
+            <div class="ml-3 text-gray-700 dark:text-gray-300 font-medium">
+              <i class="fas fa-info-circle mr-1"></i>
+              Additional Spring Boot Info
+            </div>
+          </label>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 ml-17">
+            Include project details, team info, and repository information
+          </p>
+        </div>
+
+        <!-- Additional Info Text -->
+        <div class="mb-6" *ngIf="additionalInfoEnabled">
+          <label
+            for="additionalInfoText"
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          >
+            <i class="fas fa-list-alt mr-1"></i>
+            Additional Information Text
+          </label>
+          <textarea
+            id="additionalInfoText"
+            [(ngModel)]="additionalInfoText"
+            rows="8"
+            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white font-mono text-sm transition-colors duration-200"
+            placeholder="Enter additional Spring Boot information"
+          ></textarea>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <i class="fas fa-info-circle mr-1"></i>
+            Customize project details, team information, and repository data
+          </p>
+        </div>
+
+        <!-- Banner Font -->
+        <div class="mb-6">
+          <label
+            for="bannerFont"
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          >
+            <i class="fas fa-text-height mr-1"></i>
+            Banner Font
+          </label>
+          <select
+            id="bannerFont"
+            [(ngModel)]="selectedFont"
+            (change)="onFontChange()"
+            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200"
+          >
+            <option *ngFor="let font of availableFonts" [value]="font.value">
+              {{ font.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Color Selection -->
+        <div class="mb-6">
+          <label
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          >
+            <i class="fas fa-palette mr-1"></i>
+            Banner Color
+          </label>
+          <div class="grid grid-cols-4 gap-2">
+            <button
+              *ngFor="let color of availableColors"
+              (click)="selectedColor = color.value"
+              class="p-2 rounded-md border-2 transition-all duration-200 hover:scale-105"
+              [class]="
+                selectedColor === color.value
+                  ? 'border-gray-800 dark:border-gray-200 bg-gray-100 dark:bg-gray-700'
+                  : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
+              "
+            >
+              <div class="w-6 h-6 rounded mx-auto" [ngClass]="color.class">
+                <i class="fas fa-circle"></i>
+              </div>
+              <span
+                class="text-xs text-gray-600 dark:text-gray-400 mt-1 block"
+                >{{ color.name }}</span
+              >
+            </button>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex gap-3">
+          <button
+            (click)="downloadBanner()"
+            class="flex-1 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors duration-200 flex items-center justify-center"
+          >
+            <i class="fas fa-download mr-2"></i>
+            Download
           </button>
         </div>
       </div>
 
-      <!-- Action Buttons -->
-      <div class="flex gap-3">
-        <button
-          (click)="copyToClipboard()"
-          class="flex-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center"
-        >
-          <i class="fas fa-copy mr-2"></i>
-          Copy
-        </button>
-        <button
-          (click)="downloadBanner()"
-          class="flex-1 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors duration-200 flex items-center justify-center"
-        >
-          <i class="fas fa-download mr-2"></i>
-          Download
-        </button>
-      </div>
-    </div>
-
-    <!-- Preview Panel -->
-    <div class="bg-white rounded-lg shadow-lg p-6">
-      <div class="flex justify-between items-center mb-6">
-        <h2 class="text-xl font-semibold text-gray-800">
-          <i
-            class="fas fa-desktop text-gray-600 mr-2 cursor-pointer"
-            title="Preview"
-          ></i>
-          Preview
-        </h2>
-        <button
-          (click)="copyToClipboard()"
-          class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 flex items-center cursor-pointer"
-          [class.bg-green-600]="showCopySuccess"
-          [class.hover:bg-green-700]="showCopySuccess"
-        >
-          <i
-            class="fas"
-            [class.fa-copy]="!showCopySuccess"
-            [class.fa-check]="showCopySuccess"
-            class="mr-2"
-          ></i>
-          {{ showCopySuccess ? "Copied!" : "Copy Banner" }}
-        </button>
-      </div>
-
-      <div class="bg-gray-900 rounded-lg p-4 min-h-96 relative">
-        <!-- Loading Spinner -->
-        <div
-          *ngIf="isLoading"
-          class="absolute inset-0 flex items-center justify-center"
-        >
-          <div class="text-white">
-            <i class="fas fa-spinner fa-spin text-2xl"></i>
-            <p class="mt-2">Generating...</p>
-          </div>
+      <!-- Preview Panel -->
+      <div
+        class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-colors duration-300"
+      >
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-xl font-semibold text-gray-800 dark:text-white">
+            <i
+              class="fas fa-desktop text-gray-600 dark:text-gray-400 mr-2 cursor-pointer"
+              title="Preview"
+            ></i>
+            Preview
+          </h2>
+          <button
+            (click)="copyToClipboard()"
+            class=" cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 flex items-center"
+            [class.bg-green-600]="showCopySuccess"
+            [class.hover:bg-green-700]="showCopySuccess"
+          >
+            <i
+              class="mr-2"
+              [class.fas]="true"
+              [class.fa-copy]="!showCopySuccess"
+              [class.fa-check]="showCopySuccess"
+            ></i>
+            {{ showCopySuccess ? "Copied!" : "Copy Banner" }}
+          </button>
         </div>
 
-        <!-- Generated Banner -->
-        <div *ngIf="!isLoading" class="font-mono text-sm">
-          <!-- ASCII Art -->
-          <pre class="whitespace-pre-wrap" [ngClass]="getColorClass()">{{
-            generatedBanner
-          }}</pre>
-
-          <!-- Additional Spring Boot Info -->
+        <div class="bg-gray-900 dark:bg-black rounded-lg p-4 min-h-96 relative">
+          <!-- Loading Spinner -->
           <div
-            class="mt-4"
-            *ngIf="additionalInfoEnabled && additionalInfoText.trim()"
+            *ngIf="isLoading"
+            class="absolute inset-0 flex items-center justify-center"
           >
-            <div *ngFor="let line of getAdditionalInfoLines()">
-              <pre class="whitespace-pre-wrap" [ngClass]="line.colorClass">{{
-                line.text
-              }}</pre>
+            <div class="text-white">
+              <i class="fas fa-spinner fa-spin text-2xl"></i>
+              <p class="mt-2">Generating...</p>
             </div>
           </div>
 
-          <!-- Caption -->
+          <!-- Generated Banner -->
+          <div *ngIf="!isLoading" class="font-mono text-sm">
+            <!-- ASCII Art -->
+            <pre class="whitespace-pre-wrap" [ngClass]="getColorClass()">{{
+              generatedBanner
+            }}</pre>
+
+            <!-- Additional Spring Boot Info -->
+            <div
+              class="mt-4"
+              *ngIf="additionalInfoEnabled && additionalInfoText.trim()"
+            >
+              <div *ngFor="let line of getAdditionalInfoLines()">
+                <pre class="whitespace-pre-wrap" [ngClass]="line.colorClass">{{
+                  line.text
+                }}</pre>
+              </div>
+            </div>
+
+            <!-- Caption -->
+            <div
+              *ngIf="captionEnabled && captionText.trim()"
+              class="mt-4 text-white"
+            >
+              <pre class="whitespace-pre-wrap">{{ captionText }}</pre>
+            </div>
+          </div>
+
+          <!-- Empty State -->
           <div
-            *ngIf="captionEnabled && captionText.trim()"
-            class="mt-4 text-white"
+            *ngIf="!isLoading && !generatedBanner"
+            class="absolute inset-0 flex items-center justify-center text-gray-500"
           >
-            <pre class="whitespace-pre-wrap">{{ captionText }}</pre>
+            <div class="text-center">
+              <i class="fas fa-file-alt text-4xl mb-4"></i>
+              <p>Enter text to generate banner</p>
+            </div>
           </div>
         </div>
 
-        <!-- Empty State -->
+        <!-- Banner Info -->
         <div
-          *ngIf="!isLoading && !generatedBanner"
-          class="absolute inset-0 flex items-center justify-center text-gray-500"
+          class="mt-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg transition-colors duration-300"
         >
-          <div class="text-center">
-            <i class="fas fa-file-alt text-4xl mb-4"></i>
-            <p>Enter text to generate banner</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Banner Info -->
-      <div class="mt-4 p-3 bg-gray-50 rounded-lg">
-        <div class="text-sm text-gray-600">
-          <div class="flex justify-between items-center mb-2">
-            <span>
-              <i class="fas fa-font mr-1"></i>
-              <strong>Font:</strong> {{ selectedFont }}
-            </span>
-            <span>
-              <i class="fas fa-code mr-1"></i>
-              <strong>ANSI Color:</strong> {{ selectedAnsiColor }}
-            </span>
-          </div>
-          <div class="mb-2">
-            <i class="fas fa-list mr-1"></i>
-            <strong>Banner Structure:</strong>
-            <ul class="text-xs mt-1 ml-4 list-disc">
-              <li>ASCII Art with selected color</li>
-              <li *ngIf="additionalInfoEnabled">
-                Additional Spring Boot information (BRIGHT_GREEN)
-              </li>
-              <li *ngIf="captionEnabled">Custom caption (WHITE)</li>
-            </ul>
-          </div>
-          <div>
-            <i class="fas fa-folder mr-1"></i>
-            <strong>Usage:</strong> Save as
-            <code class="bg-gray-200 px-1 rounded">banner.txt</code> in your
-            Spring Boot
-            <code class="bg-gray-200 px-1 rounded">src/main/resources</code>
-            folder
+          <div class="text-sm text-gray-600 dark:text-gray-300">
+            <div class="flex justify-between items-center mb-2">
+              <span>
+                <i class="fas fa-font mr-1"></i>
+                <strong>Font:</strong> {{ selectedFont }}
+              </span>
+              <span>
+                <i class="fas fa-code mr-1"></i>
+                <strong>ANSI Color:</strong> {{ selectedAnsiColor }}
+              </span>
+            </div>
+            <div class="mb-2">
+              <i class="fas fa-list mr-1"></i>
+              <strong>Banner Structure:</strong>
+              <ul class="text-xs mt-1 ml-4 list-disc">
+                <li>ASCII Art with selected color</li>
+                <li *ngIf="additionalInfoEnabled">
+                  Additional Spring Boot information (BRIGHT_GREEN)
+                </li>
+                <li *ngIf="captionEnabled">Custom caption (WHITE)</li>
+              </ul>
+            </div>
+            <div>
+              <i class="fas fa-folder mr-1"></i>
+              <strong>Usage:</strong> Save as
+              <code class="bg-gray-200 dark:bg-gray-600 px-1 rounded"
+                >banner.txt</code
+              >
+              in your Spring Boot
+              <code class="bg-gray-200 dark:bg-gray-600 px-1 rounded"
+                >src/main/resources</code
+              >
+              folder
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Footer -->
-  <div class="text-center mt-12 text-gray-500">
-    <p class="mb-2">
-      <i class="fas fa-info-circle mr-1"></i>
-      This generator creates ASCII art banners for Spring Boot applications
-      using FIGlet fonts
-    </p>
-    <p class="text-sm">
-      <i class="fas fa-leaf mr-1"></i>
-      Place the generated
-      <code class="bg-gray-200 px-1 rounded">banner.txt</code> file in your
-      <code class="bg-gray-200 px-1 rounded">src/main/resources</code> directory
-    </p>
+    <!-- Footer -->
+    <div class="text-center mt-12 text-gray-500 dark:text-gray-400">
+      <p class="mb-2">
+        <i class="fas fa-info-circle mr-1"></i>
+        This generator creates ASCII art banners for Spring Boot applications
+        using FIGlet fonts
+      </p>
+      <p class="text-sm">
+        <i class="fas fa-leaf mr-1"></i>
+        Place the generated
+        <code class="bg-gray-200 dark:bg-gray-600 px-1 rounded"
+          >banner.txt</code
+        >
+        file in your
+        <code class="bg-gray-200 dark:bg-gray-600 px-1 rounded"
+          >src/main/resources</code
+        >
+        directory
+      </p>
+    </div>
   </div>
 </div>

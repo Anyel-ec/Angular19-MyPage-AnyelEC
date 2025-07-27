@@ -4,5 +4,5 @@ import { BannerSpringbootComponent } from './feature/banner-spring/banner-spring
 
 export const routes: Routes = [
     { path: '500', component: Error500 },
-    { path: 'projects/banner-springboot', component: BannerSpringbootComponent}
+    { path: 'projects/banner-spring', component: BannerSpringbootComponent}
 ];
