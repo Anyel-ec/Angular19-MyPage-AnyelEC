@@ -209,7 +209,7 @@ export class BannerSpringbootComponent implements OnInit, OnDestroy {
       this.showCopySuccess = true;
       setTimeout(() => {
         this.showCopySuccess = false;
-      }, 2000);
+      }, 300);
     } catch (error) {
       console.error('Fallback copy failed:', error);
     } finally {
