@@ -38,9 +38,7 @@ export class BannerSpringbootComponent implements OnInit, OnDestroy {
   isDarkMode = false;
   private themeSubscription?: Subscription;
 
-  availableFonts = [
-    { value: 'standard', name: 'Standard' },
-  ];
+  availableFonts = [{ value: 'standard', name: 'Standard' }];
 
   availableColors = [
     {
@@ -88,6 +86,12 @@ export class BannerSpringbootComponent implements OnInit, OnDestroy {
     },
   ];
 
+  private readonly ansiMap: Record<string, string> = {
+    'text-green-400': 'AnsiColor.BRIGHT_GREEN',
+    'text-yellow-400': 'AnsiColor.BRIGHT_YELLOW',
+    'text-cyan-400': 'AnsiColor.BRIGHT_CYAN',
+    'text-purple-400': 'AnsiColor.BRIGHT_MAGENTA',
+  };
   constructor(
     private figletService: FigletService,
     private titleService: Title,
@@ -229,21 +233,25 @@ export class BannerSpringbootComponent implements OnInit, OnDestroy {
   }
 
   private getFullBannerWithAnsiColors(): string {
-    const selectedColorObj = this.availableColors.find(
-      (c) => c.value === this.selectedColor
-    );
-    const ansiColor = selectedColorObj
-      ? selectedColorObj.ansi
-      : 'AnsiColor.BLUE';
+    // Color seleccionado para el arte ASCII
+    const bannerAnsi =
+      this.availableColors.find((c) => c.value === this.selectedColor)?.ansi ??
+      'AnsiColor.BLUE';
 
-    let result = `\${${ansiColor}}\n${this.generatedBanner}\n`;
+    let result = `\${${bannerAnsi}}\n${this.generatedBanner}\n\n`;
 
+    // Información adicional línea a línea con su color
     if (this.additionalInfoEnabled && this.additionalInfoText.trim()) {
-      result += `\n\${AnsiColor.BRIGHT_GREEN}${this.additionalInfoText}\n`;
+      for (const { text, colorClass } of this.getAdditionalInfoLines()) {
+        const ansi = this.ansiMap[colorClass] ?? 'AnsiColor.WHITE';
+        result += `\${${ansi}}${text}\n`;
+      }
+      result += '\n'; // salto extra al final de la sección
     }
 
+    // Leyenda (pie de página) siempre en blanco
     if (this.captionEnabled && this.captionText.trim()) {
-      result += `\n\${AnsiColor.WHITE}${this.captionText}`;
+      result += `\${AnsiColor.WHITE}${this.captionText}`;
     }
 
     return result;
