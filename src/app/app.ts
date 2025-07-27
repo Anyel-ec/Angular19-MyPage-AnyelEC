@@ -24,7 +24,8 @@ export class App {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        this.showLayout = !['/500'].includes(event.urlAfterRedirects);
+        this.showLayout = !['/500', '/projects/banner-springboot'].includes(event.urlAfterRedirects);
+
       });
   }
 }
