@@ -9,7 +9,7 @@
         Spring Boot Banner Generator
       </h1>
       <p class="text-gray-600 dark:text-gray-300">
-        Online Spring Boot Banner Generator (with FIGlet Fonts)
+        Online Spring Boot Banner Generator
       </p>
     </div>
 
@@ -52,9 +52,12 @@
                 class="sr-only"
               />
               <div
-                class="block bg-gray-600 w-14 h-8 rounded-full"
+                class="block w-14 h-8 rounded-full transition-colors duration-300"
+                [class.bg-gray-600]="!captionEnabled"
                 [class.bg-blue-600]="captionEnabled"
               ></div>
+
+              <!-- Dot -->
               <div
                 class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition transform"
                 [class.translate-x-6]="captionEnabled"
@@ -100,12 +103,16 @@
                 [(ngModel)]="additionalInfoEnabled"
                 class="sr-only"
               />
+              <!-- Fondo del switch -->
               <div
-                class="block bg-gray-600 w-14 h-8 rounded-full"
+                class="block w-14 h-8 rounded-full transition-colors duration-300"
+                [class.bg-gray-600]="!additionalInfoEnabled"
                 [class.bg-blue-600]="additionalInfoEnabled"
               ></div>
+
+              <!-- Dot -->
               <div
-                class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition transform"
+                class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform duration-300"
                 [class.translate-x-6]="additionalInfoEnabled"
               ></div>
             </div>
@@ -218,7 +225,7 @@
           </h2>
           <button
             (click)="copyToClipboard()"
-            class=" cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 flex items-center"
+            class="cursor-pointer bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors duration-200 flex items-center"
             [class.bg-green-600]="showCopySuccess"
             [class.hover:bg-green-700]="showCopySuccess"
           >
